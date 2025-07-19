@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - TasteKart</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <a href="index.php" class="logo">TasteKart</a>
+        <nav>
+            <a href="index.php">Home</a>
+            <a href="login.php">Login</a>
+        </nav>
+    </header>
+
+    <section class="register-section">
+        <h2 style="text-align: center; margin-bottom: 1.5rem; color: var(--primary-color);">Register</h2>
+        <form method="POST" class="register-form">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required>
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+            <label for="phone">Phone</label>
+            <input type="text" id="phone" name="phone" required>
+            <label for="role">Role</label>
+            <select id="role" name="role" required>
+                <option value="customer">Customer</option>
+                <option value="restaurant">Restaurant</option>
+                <option value="admin">Admin</option>
+            </select>
+            <button type="submit">Register</button>
+        </form>
+    </section>
+</body>
+</html>
