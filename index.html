@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>TasteKart - Online Food Ordering</title>
+    <style>
+        /* Merged CSS */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--background, #f8f9fa);
+            color: var(--text-color, #333);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        /* Colors */
+        :root {
+            --primary-color: #ff4c77;
+            --primary-dark: #e8436b;
+            --accent-color: #6f30a9;
+            --background: #f8f9fa;
+            --background-light: #fafafa;
+            --card-bg: #fff;
+            --shadow: rgba(0, 0, 0, 0.1);
+            --text-color: #333;
+        }
+
+        /* Header */
+        header {
+            background: white;
+            box-shadow: 0 2px 8px var(--shadow);
+            padding: 12px 24px;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 900;
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            letter-spacing: 2px;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
+        nav a {
+            font-weight: 600;
+            font-size: 1rem;
+            color: #444;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--primary-color);
+        }
+
+        .btn-login, .btn-register {
+            border-radius: 20px;
+            padding: 8px 18px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            cursor: pointer;
+            background: transparent;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        .btn-login:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn-register {
+            background: var(--primary-color);
+            color: white;
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn-register:hover {
+            background: var(--primary-dark);
+            border-color: var(--primary-dark);
+        }
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            padding: 3rem 2rem;
+            background: linear-gradient(135deg, #ff4c77 0%, #6f30a9 100%);
+            color: white;
+            gap: 2rem;
+        }
+
+        .hero-text {
+            flex: 1 1 400px;
+            max-width: 600px;
+        }
+
+        .hero-text h1 {
+            font-size: 3.2rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            line-height: 1.1;
+        }
+
+        .hero-text p {
+            font-size: 1.25rem;
+            margin-bottom: 1.8rem;
+            font-weight: 500;
+            opacity: 0.9;
+        }
+
+        .hero-text .btn-order {
+            background: white;
+            color: var(--primary-color);
+            font-weight: 700;
+            padding: 14px 24px;
+            border-radius: 25px;
+            font-size: 1.125rem;
+            box-shadow: 0 5px 15px rgba(255, 76, 119, 0.4);
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .hero-text .btn-order:hover {
+            background: #ffe3e9;
+        }
+
+        .hero-image {
+            flex: 1 1 400px;
+            max-width: 500px;
+        }
+
+        .hero-image img {
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(111, 48, 169, 0.5);
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+
+        /* Search & Category Navigation */
+        .search-section {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .search-bar {
+            width: 100%;
+            max-width: 700px;
+            display: flex;
+            margin: 0 auto 2rem auto;
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: 0 2px 12px rgba(111, 48, 169, 0.15);
+        }
+
+        .search-bar input {
+            flex-grow: 1;
+            padding: 14px 20px;
+            border: none;
+            outline: none;
+            font-size: 1rem;
+        }
+
+        .search-bar button {
+            background: var(--primary-color);
+            border: none;
+            color: white;
+            padding: 0 22px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: background 0.3s;
+            font-size: 1rem;
+        }
+
+        .search-bar button:hover {
+            background: var(--primary-dark);
+        }
+
+        .categories {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem 2rem;
+        }
+
+        .category {
+            background: var(--background-light);
+            border-radius: 9999px;
+            padding: 10px 26px;
+            font-weight: 600;
+            font-size: 1rem;
+            color: #444;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: border-color 0.3s, color 0.3s;
+            user-select: none;
+        }
+
+        .category:hover,
+        .category.active {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+            background: #fff;
+            font-weight: 700;
+        }
+
+        /* Menu Section */
+        .menu-section {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 1rem;
+        }
+
+        .menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.8rem;
+        }
+
+        .menu-header h2 {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary-color);
+        }
+
+        .menu-grid {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 1rem;
+            padding: 1rem;
+            justify-content: center;
+        }
+
+        .menu-card {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            background: var(--card-bg);
+            border-radius: 15px;
+            box-shadow: 0 5px 15px var(--shadow);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            max-width: 100%;
+            width: calc(50% - 0.5rem); /* Two items per row with gap adjustment */
+        }
+
+        .menu-card img {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 15px 0 0 15px;
+        }
+
+        .menu-card-content {
+            flex: 1;
+            padding: 1rem;
+        }
+
+        .menu-title {
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 6px;
+            color: #222;
+        }
+
+        .menu-desc {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 8px;
+            line-height: 1.2;
+        }
+
+        .menu-price-preptime {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 0.5rem;
+            font-weight: 600;
+            color: var(--primary-dark);
+            font-size: 1rem;
+        }
+
+        .add-to-cart-btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            cursor: pointer;
+            margin-top: 0.5rem;
+            font-weight: 700;
+            transition: background 0.3s ease;
+        }
+
+        .add-to-cart-btn:hover {
+            background: var(--primary-dark);
+        }
+
+        /* Order Section */
+        .order-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .order-history {
+            display: none;
+        }
+
+        .order-history.active {
+            display: block;
+        }
+
+        .toggle-button {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-bottom: 1rem;
+        }
+
+        .toggle-button:hover {
+            background: var(--primary-dark);
+        }
+
+        /* Cart Sidebar */
+        #cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 350px;
+            height: 100vh;
+            background: white;
+            box-shadow: -8px 0 20px rgba(0, 0, 0, 0.3);
+            z-index: 20;
+            transition: right 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #cart-sidebar.active {
+            right: 0;
+        }
+
+        #cart-sidebar header {
+            background: var(--primary-color);
+            color: white;
+            padding: 18px 24px;
+            font-size: 1.4rem;
+            font-weight: 700;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #cart-sidebar header button {
+            background: transparent;
+            border: none;
+            font-size: 1.6rem;
+            color: white;
+            cursor: pointer;
+        }
+
+        #cart-items {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: 10px 24px;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .cart-item-info {
+            flex-grow: 1;
+        }
+
+        .cart-item-name {
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .cart-item-qty {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .cart-item-price {
+            font-weight: 700;
+            color: var(--primary-dark);
+            min-width: 60px;
+            text-align: right;
+        }
+
+        #cart-total {
+            padding: 18px 24px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            border-top: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        #checkout-btn {
+            background: var(--primary-color);
+            color: white;
+            padding: 14px 0;
+            border: none;
+            font-weight: 800;
+            font-size: 1.125rem;
+            cursor: pointer;
+            width: 100%;
+            border-radius: 0 0 15px 15px;
+            transition: background 0.3s ease;
+        }
+
+        #checkout-btn:hover {
+            background: var(--primary-dark);
+        }
+
+        /* Footer */
+        footer {
+            background: #222;
+            color: #ddd;
+            text-align: center;
+            padding: 1.6rem 1rem;
+            margin-top: auto;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .hero-image {
+                max-width: 100%;
+                width: 320px;
+                margin: 0 auto;
+            }
+
+            nav {
+                gap: 12px;
+            }
+
+            .menu-grid {
+                grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            }
+
+            #cart-sidebar {
+                width: 100vw;
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.html" class="logo">TasteKart</a>
+        <nav>
+            <a href="#restaurants">Restaurants</a>
+            <a href="#menu">Menu</a>
+            <a href="offers.html">Offers</a>
+            <a href="order_history.html">Order History</a>
+            <button class="btn-login" onclick="window.location.href='login.html'">Login</button>
+            <button class="btn-register" onclick="window.location.href='register.html'">Register</button>
+            <button id="cart-toggle" aria-label="View Cart" title="Cart">
+                🛒 <span id="cart-count">0</span>
+            </button>
+        </nav>
+    </header>
+
+    <section class="hero" aria-label="Hero section with promotional content">
+        <div class="hero-text">
+            <h1>Delicious meals delivered to your doorstep</h1>
+            <p>Discover your favorite restaurants, order food online, and get delivery fast and fresh.</p>
+            <button class="btn-order" id="explore-menu-btn">Order Now</button>
+        </div>
+        <div class="hero-image">
+            <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Delicious meal with food and drinks" />
+        </div>
+    </section>
+
+    <section class="search-section" aria-label="Food search and categories">
+        <form class="search-bar" id="search-form" role="search" aria-label="Search for meals or restaurants">
+            <input type="search" id="search-input" placeholder="রেস্টুরেন্ট বা খাবার খুঁজুন..." aria-label="Search input" />
+            <button type="submit" aria-label="Search button">Search</button>
+        </form>
+        <select id="filter-restaurant" class="category" style="padding: 10px 26px; margin-bottom: 1rem;">
+            <option value="">সব রেস্টুরেন্ট</option>
+            <!-- Restaurant options would be dynamically populated -->
+        </select>
+        <div class="categories" role="list" aria-label="Food categories filter">
+            <div class="category active" data-category="all" role="listitem" tabindex="0">All</div>
+            <div class="category" data-category="pizza" role="listitem" tabindex="0">Pizza</div>
+            <div class="category" data-category="burgers" role="listitem" tabindex="0">Burgers</div>
+            <div class="category" data-category="asian" role="listitem" tabindex="0">Asian</div>
+            <div class="category" data-category="desserts" role="listitem" tabindex="0">Desserts</div>
+            <div class="category" data-category="beverages" role="listitem" tabindex="0">Beverages</div>
+        </div>
+    </section>
+
+    <section class="menu-section" id="menu" aria-label="Menu items">
+        <div class="menu-header">
+            <h2>Popular Dishes</h2>
+        </div>
+        <div class="menu-grid" id="menu-grid">
+            <!-- Menu cards will be populated by JS -->
+        </div>
+    </section>
+
+    <section class="dashboard-section" style="max-width: 1200px; margin: 3rem auto; padding: 1rem; text-align: center;">
+        <p style="color: #666;">Please <a href="login.html">log in</a> to view your orders.</p>
+    </section>
+
+    <aside id="cart-sidebar" aria-label="Shopping Cart" aria-hidden="true">
+        <header>
+            <span>Cart</span>
+            <button id="close-cart" aria-label="Close cart sidebar">×</button>
+        </header>
+        <div id="cart-items" tabindex="0">
+            <p style="padding: 20px; text-align: center; color: #999;">Your cart is empty</p>
+        </div>
+        <div id="cart-total" aria-live="polite" aria-atomic="true">
+            <span>Total:</span>
+            <span id="cart-total-price">৳0.00</span>
+        </div>
+        <button id="checkout-btn" aria-label="Proceed to checkout">Checkout</button>
+    </aside>
+
+    <footer>
+        © 2025 TasteKart. All rights reserved. Designed inspired by Tuhinuzzaman Tuhin.
+    </footer>
+</body>
+</html>
