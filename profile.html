@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - TasteKart</title>
+    <style>
+        :root {
+            --primary-color: #ff6f61;
+            --primary-dark: #e55a4f;
+            --card-bg: #ffffff;
+            --shadow: rgba(0, 0, 0, 0.1);
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        header {
+            background: var(--primary-color);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 1.5rem;
+            font-weight: 500;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        .profile-section {
+            max-width: 600px;
+            margin: 3rem auto;
+            padding: 1rem;
+        }
+        .profile-form {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px var(--shadow);
+        }
+        .profile-form label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        .profile-form input,
+        .profile-form textarea {
+            width: 100%;
+            padding: 0.75rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+        .profile-form button {
+            width: 100%;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.75rem;
+            border-radius: 25px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+        .profile-form button:hover {
+            background: var(--primary-dark);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.php" class="logo">TasteKart</a>
+        <nav>
+            <a href="index.php">Home</a>
+            <a href="order_history.php">Order History</a>
+            <a href="profile.php">Profile</a>
+            <a href="logout.php">Logout</a>
+        </nav>
+    </header>
+    <section class="profile-section">
+        <h2 style="text-align: center; margin-bottom: 1.5rem; color: var(--primary-color);">Profile</h2>
+        <form method="POST" class="profile-form">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" value="John Doe" required>
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" value="john.doe@example.com" required>
+            <label for="phone">Phone</label>
+            <input type="text" id="phone" name="phone" value="+880123456789" required>
+            <label for="address">Address</label>
+            <textarea id="address" name="address" placeholder="ঠিকানা">123 Main Street, Dhaka</textarea>
+            <button type="submit">Update Profile</button>
+        </form>
+    </section>
+</body>
+</html>
