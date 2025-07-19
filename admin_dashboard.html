@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>TasteKart - Admin Dashboard</title>
+    <style>
+        .dashboard-section { 
+            max-width: 1200px; 
+            margin: 3rem auto; 
+            padding: 1rem; 
+        }
+        .dashboard-card { 
+            background: var(--card-bg, #fff); 
+            padding: 1.5rem; 
+            border-radius: 15px; 
+            box-shadow: 0 5px 15px var(--shadow, rgba(0,0,0,0.1)); 
+            text-align: center; 
+            margin-bottom: 1.5rem; 
+        }
+        .dashboard-card h3 { 
+            margin: 0 0 0.5rem; 
+            color: var(--primary-color, #d32f2f); 
+        }
+        .dashboard-card p { 
+            margin: 0; 
+            font-size: 1.2rem; 
+            color: #333; 
+        }
+        .order-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+            gap: 2rem; 
+        }
+        .menu-card { 
+            background: var(--card-bg, #fff); 
+            padding: 1.5rem; 
+            border-radius: 15px; 
+            box-shadow: 0 5px 15px var(--shadow, rgba(0,0,0,0.1)); 
+        }
+        .menu-card h3 { 
+            margin-top: 0; 
+            color: #333; 
+        }
+        .menu-card p { 
+            margin: 0.5rem 0; 
+            color: #666; 
+        }
+        .error, .success { 
+            text-align: center; 
+            margin-bottom: 1rem; 
+            padding: 0.5rem; 
+            border-radius: 4px; 
+        }
+        .error { 
+            color: #e74c3c; 
+            background-color: #ffebee; 
+        }
+        .success { 
+            color: #27ae60; 
+            background-color: #e8f5e9; 
+        }
+        .confirmed-orders { 
+            font-size: 1.2rem; 
+            font-weight: 600; 
+            color: var(--primary-color, #d32f2f); 
+            margin-bottom: 1rem; 
+            text-align: center; 
+            padding: 0.5rem; 
+            background: var(--card-bg, #fff); 
+            border-radius: 8px; 
+            box-shadow: 0 2px 5px var(--shadow, rgba(0,0,0,0.1)); 
+        }
+        .confirmed-orders.zero { 
+            color: #999; 
+        }
+        .order-history { 
+            display: none; 
+        }
+        .order-history.active { 
+            display: block; 
+        }
+        .toggle-button { 
+            background: var(--primary-color, #d32f2f); 
+            color: white; 
+            border: none; 
+            padding: 0.75rem 1.5rem; 
+            border-radius: 25px; 
+            font-weight: 700; 
+            cursor: pointer; 
+            margin-bottom: 1rem; 
+        }
+        .toggle-button:hover { 
+            background: var(--primary-dark, #b71c1c); 
+        }
+        #orderTrendsChart { 
+            max-width: 600px; 
+            margin: 0 auto; 
+        }
+        body { 
+            font-family: Arial, sans-serif; 
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background: var(--primary-color, #d32f2f);
+            color: white;
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+            color: white;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 1.5rem;
+            font-weight: 500;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.php" class="logo">TasteKart</a>
+        <nav>
+            <a href="index.php">Home</a>
+            <a href="profile.php">Profile</a>
+            <a href="logout.php">Logout</a>
+        </nav>
+    </header>
+
+    <section class="dashboard-section">
+        <h2 style="text-align: center; margin-bottom: 1.5rem; color: var(--primary-color, #d32f2f);">Admin Dashboard</h2>
+
+        <div class="dashboard-card">
+            <h3>Total Orders</h3>
+            <p>{{totalOrders}}</p>
+        </div>
+        <div class="dashboard-card">
+            <h3>Total Revenue (৳)</h3>
+            <p>{{totalRevenue}}</p>
+        </div>
+        <div class="dashboard-card">
+            <h3>Order Trends</h3>
+            <div id="orderTrendsChart">
+                <canvas id="chart-canvas"></canvas>
+            </div>
+        </div>
+
+        <div class="confirmed-orders">
+            Total Confirmed Orders (Delivered): {{confirmedOrdersCount}}
+        </div>
+        <button class="toggle-button" onclick="toggleOrderHistory()">View Orders</button>
+        <div class="order-history" id="order-history">
+            <div class="order-grid">
+                <!-- Dynamic content will be inserted here -->
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function toggleOrderHistory() {
+            const orderHistory = document.getElementById('order-history');
+            orderHistory.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
