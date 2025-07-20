@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>TasteKart - Restaurant Dashboard</title>
+    <style>
+        :root {
+            --primary-color: #d32f2f;
+            --primary-dark: #b71c1c;
+            --card-bg: #fff;
+            --shadow: rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background: var(--primary-color);
+            color: white;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+            color: white;
+        }
+
+        header nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 1.5rem;
+            font-weight: 500;
+        }
+
+        header nav a:hover {
+            text-decoration: underline;
+        }
+
+        .dashboard-section {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 1rem;
+        }
+
+        .dashboard-section h2 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .dashboard-section h3 {
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .dashboard-section form {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px var(--shadow);
+            margin-bottom: 2rem;
+        }
+
+        .dashboard-section label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .dashboard-section input,
+        .dashboard-section select {
+            width: 100%;
+            padding: 0.75rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .dashboard-section button {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.75rem;
+            border-radius: 25px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .dashboard-section button:hover {
+            background: var(--primary-dark);
+        }
+
+        .menu-grid,
+        .order-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .menu-card {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px var(--shadow);
+        }
+
+        .menu-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
+
+        .menu-card h3 {
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .menu-card p {
+            margin-bottom: 0.5rem;
+            color: #666;
+        }
+
+        .error,
+        .success {
+            text-align: center;
+            margin-bottom: 1rem;
+            padding: 0.5rem;
+            border-radius: 4px;
+        }
+
+        .error {
+            color: #e74c3c;
+            background-color: #ffebee;
+        }
+
+        .success {
+            color: #27ae60;
+            background-color: #e8f5e9;
+        }
+
+        .confirmed-orders {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            text-align: center;
+            padding: 0.5rem;
+            background: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: 0 2px 5px var(--shadow);
+        }
+
+        .confirmed-orders.zero {
+            color: #999;
+        }
+
+        .order-history {
+            display: none;
+        }
+
+        .order-history.active {
+            display: block;
+        }
+
+        .toggle-button {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-bottom: 1rem;
+        }
+
+        .toggle-button:hover {
+            background: var(--primary-dark);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.html" class="logo">TasteKart</a>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="restaurant_dashboard.html">Order History</a>
+            <a href="profile.html">Profile</a>
+            <a href="logout.html">Logout</a>
+        </nav>
+    </header>
+
+    <section class="dashboard-section">
+        <h2>Restaurant Dashboard</h2>
+
+        <div class="success">Menu item added successfully.</div>
+        <div class="error">Error fetching orders.</div>
+
+        <h3>Add New Menu Item</h3>
+        <form>
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required>
+            <label for="category">Category</label>
+            <select id="category" name="category" required>
+                <option value="pizza">Pizza</option>
+                <option value="burgers">Burgers</option>
+                <option value="asian">Asian</option>
+                <option value="desserts">Desserts</option>
+                <option value="beverages">Beverages</option>
+            </select>
+            <label for="price">Price (৳)</label>
+            <input type="number" id="price" name="price" step="0.01" required>
+            <label for="prep_time"> Feature Time (minutes)</label>
+            <input type="number" id="prep_time" name="prep_time" required>
+            <label for="image">Image URL</label>
+            <input type="text" id="image" name="image" placeholder="Optional">
+            <button type="submit">Add Item</button>
+        </form>
+
+        <h3>Your Menu Items</h3>
+        <div class="menu-grid">
+            <div class="menu-card">
+                <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Margherita Pizza">
+                <h3>Margherita Pizza</h3>
+                <p>Category: Pizza</p>
+                <p>Price: ৳450.00</p>
+                <p>Prep Time: 15 mins</p>
+                <form>
+                    <label for="name_1">Name</label>
+                    <input type="text" id="name_1" name="name" value="Margherita Pizza" required>
+                    <label for="category_1">Category</label>
+                    <select id="category_1" name="category" required>
+                        <option value="pizza" selected>Pizza</option>
+                        <option value="burgers">Burgers</option>
+                        <option value="asian">Asian</option>
+                        <option value="desserts">Desserts</option>
+                        <option value="beverages">Beverages</option>
+                    </select>
+                    <label for="price_1">Price (৳)</label>
+                    <input type="number" id="price_1" name="price" step="0.01" value="450.00" required>
+                    <label for="prep_time_1">Prep Time (minutes)</label>
+                    <input type="number" id="prep_time_1" name="prep_time" value="15" required>
+                    <label for="image_1">Image URL</label>
+                    <input type="text" id="image_1" name="image" value="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80">
+                    <button type="submit">Update Item</button>
+                </form>
+            </div>
+        </div>
+
+        <h3>Orders</h3>
+        <div class="confirmed-orders zero">
+            Total Confirmed Orders (Delivered): 0
+            <br><span style="font-size: 0.9rem; color: #666;">(No orders delivered yet. Update an order status to 'Delivered' using the form below.)</span>
+        </div>
+        <button class="toggle-button">View Orders</button>
+        <div class="order-history" id="order-history">
+            <div class="order-grid">
+                <p style="text-align: center; color: #999;">No orders available for your restaurant.</p>
+            </div>
+        </div>
+        <div class="order-grid">
+            <div class="menu-card">
+                <h3>Order #1</h3>
+                <p>Customer: John Doe</p>
+                <p>Total: ৳750.00</p>
+                <p>Status: Pending</p>
+                <form>
+                    <select name="status">
+                        <option value="pending" selected>Pending</option>
+                        <option value="received">Received</option>
+                        <option value="preparing">Preparing</option>
+                        <option value="delivered">Delivered</option>
+                        <option value="cancelled">Cancelled</option>
+                        <option value="validating">Validating</option>
+                    </select>
+                    <button type="submit">Update Status</button>
+                </form>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
