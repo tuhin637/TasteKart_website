@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>TasteKart - Checkout</title>
+    <style>
+        .checkout-section { 
+            max-width: 600px; 
+            margin: 3rem auto; 
+            padding: 1rem; 
+        }
+        .checkout-section form { 
+            background: var(--card-bg, #fff); 
+            padding: 2rem; 
+            border-radius: 15px; 
+            box-shadow: 0 5px 15px var(--shadow, rgba(0,0,0,0.1)); 
+        }
+        .checkout-section label { 
+            display: block; 
+            font-weight: 600; 
+            margin-bottom: 0.5rem; 
+        }
+        .checkout-section input { 
+            width: 100%; 
+            padding: 0.75rem; 
+            margin-bottom: 1rem; 
+            border: 1px solid #ddd; 
+            border-radius: 8px; 
+            font-size: 1rem; 
+        }
+        .checkout-section button { 
+            width: 100%; 
+            background: var(--primary-color, #d32f2f); 
+            color: white; 
+            border: none; 
+            padding: 0.75rem; 
+            border-radius: 25px; 
+            font-weight: 700; 
+            cursor: pointer; 
+        }
+        .checkout-section button:hover { 
+            background: var(--primary-dark, #b71c1c); 
+        }
+        .error { 
+            color: #e74c3c; 
+            background-color: #ffebee; 
+            padding: 0.5rem; 
+            border-radius: 4px; 
+            text-align: center; 
+            margin-bottom: 1rem; 
+        }
+        body { 
+            font-family: Arial, sans-serif; 
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background: var(--primary-color, #d32f2f);
+            color: white;
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+            color: white;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 1.5rem;
+            font-weight: 500;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.php" class="logo">TasteKart</a>
+        <nav>
+            <a href="index.php">Home</a>
+            <a href="order_history.php">Order History</a>
+            <a href="profile.php">Profile</a>
+            <a href="logout.php">Logout</a>
+        </nav>
+    </header>
+
+    <section class="checkout-section">
+        <h2 style="text-align: center; margin-bottom: 1.5rem; color: var(--primary-color, #d32f2f);">Checkout</h2>
+        <form method="POST" action="checkout.php">
+            <label for="delivery_address">Delivery Address</label>
+            <input type="text" id="delivery_address" name="delivery_address" required>
+            <label for="coupon_code">Coupon Code (Optional)</label>
+            <input type="text" id="coupon_code" name="coupon_code">
+            <button type="submit">Proceed to Payment</button>
+        </form>
+    </section>
+</body>
+</html>
