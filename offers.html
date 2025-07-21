@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>TasteKart - Offers</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .offer-section { max-width: 1200px; margin: 3rem auto; padding: 1rem; }
+        .offer-card { background: var(--card-bg); border-radius: 15px; box-shadow: 0 5px 15px var(--shadow); padding: 1.5rem; margin-bottom: 1rem; }
+        .offer-form { background: var(--card-bg); padding: 2rem; border-radius: 15px; box-shadow: 0 5px 15px var(--shadow); }
+        .offer-form label { display: block; font-weight: 600; margin-bottom: 0.5rem; }
+        .offer-form input { width: 100%; padding: 0.75rem; margin-bottom: 1rem; border: 1px solid #ddd; border-radius: 8px; font-size: 1rem; }
+        .offer-form button { background: var(--primary-color); color: white; border: none; padding: 0.75rem; border-radius: 25px; font-weight: 700; cursor: pointer; }
+        .offer-form button:hover { background: var(--primary-dark); }
+
+        :root {
+    --primary-color: #ff5733;
+    --primary-dark: #c70039;
+    --card-bg: #ffffff;
+    --shadow: rgba(0, 0, 0, 0.1);
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f4f4f4;
+}
+
+header {
+    background: var(--primary-color);
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header .logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 1.5rem;
+    font-size: 1rem;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+.offer-section {
+    max-width: 1200px;
+    margin: 3rem auto;
+    padding: 1rem;
+}
+
+.offer-card {
+    background: var(--card-bg);
+    border-radius: 15px;
+    box-shadow: 0 5px 15px var(--shadow);
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.offer-form {
+    background: var(--card-bg);
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px var(--shadow);
+}
+
+.offer-form label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.offer-form input {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+}
+
+.offer-form button {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0.75rem;
+    border-radius: 25px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.offer-form button:hover {
+    background: var(--primary-dark);
+}
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.php" class="logo">TasteKart</a>
+        <nav>
+            <a href="index.php">Home</a>
+            <a href="order_history.php">Order History</a>
+            <a href="profile.php">Profile</a>
+            <a href="admin_dashboard.php">Dashboard</a>
+            <a href="logout.php">Logout</a>
+            <a href="login.php">Login</a>
+            <a href="register.php">Register</a>
+        </nav>
+    </header>
+
+    <section class="offer-section">
+        <h2 style="text-align: center; margin-bottom: 1.5rem; color: var(--primary-color);">Offers & Coupons</h2>
+        <form method="POST" class="offer-form">
+            <label for="code">Coupon Code</label>
+            <input type="text" id="code" name="code" required>
+            <label for="discount">Discount (%)</label>
+            <input type="number" id="discount" name="discount" step="0.01" required>
+            <label for="expiry_date">Expiry Date</label>
+            <input type="date" id="expiry_date" name="expiry_date" required>
+            <label for="min_order_value">Minimum Order Value (৳)</label>
+            <input type="number" id="min_order_value" name="min_order_value" step="0.01" required>
+            <button type="submit" name="add_coupon">Add Coupon</button>
+        </form>
+        <h3>Available Offers</h3>
+        <div class="offer-card">
+            <h4>Code: SAMPLECODE</h4>
+            <p>Discount: 10%</p>
+            <p>Minimum Order: ৳500</p>
+            <p>Expires: 2025-12-31</p>
+        </div>
+    </section>
+</body>
+</html>
