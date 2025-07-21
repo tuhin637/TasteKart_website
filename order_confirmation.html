@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>TasteKart - Order Confirmation</title>
+    <style>
+        .confirmation-section { 
+            max-width: 600px; 
+            margin: 3rem auto; 
+            padding: 1rem; 
+            text-align: center; 
+        }
+        .confirmation-card { 
+            background: #ffffff; 
+            border-radius: 15px; 
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); 
+            padding: 2rem; 
+        }
+        .item-list { 
+            text-align: left; 
+            margin-top: 1rem; 
+        }
+        .toggle-button { 
+            background: #d32f2f; 
+            color: white; 
+            border: none; 
+            padding: 0.75rem 1.5rem; 
+            border-radius: 25px; 
+            font-weight: 700; 
+            cursor: pointer; 
+            margin-bottom: 1rem; 
+        }
+        .toggle-button:hover { 
+            background: #b71c1c; 
+        }
+        header {
+            background: #f8f8f8;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #d32f2f;
+            text-decoration: none;
+        }
+        nav a {
+            margin-left: 1rem;
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+        }
+        nav a:hover {
+            color: #d32f2f;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.php" class="logo">TasteKart</a>
+        <nav>
+            <a href="index.php">Home</a>
+            <a href="order_history.php">Order History</a>
+            <a href="profile.php">Profile</a>
+            <a href="logout.php">Logout</a>
+        </nav>
+    </header>
+
+    <section class="confirmation-section">
+        <h2 style="margin-bottom: 1.5rem; color: #d32f2f;">Order Confirmed!</h2>
+
+        <div class="confirmation-card">
+            <h3>Order #12345</h3>
+            <p>Restaurant: Example Restaurant</p>
+            <p>Total: ৳800</p>
+            <p>Status: Confirmed</p>
+            <p>Placed on: 2025-07-17</p>
+            <h4>Items:</h4>
+            <div class="item-list">
+                <p>Burger (x2) - ৳300</p>
+                <p>Fries (x1) - ৳100</p>
+                <p>Coke (x2) - ৳100</p>
+            </div>
+            <p>Thank you for your order! It will be delivered soon.</p>
+            <a href="order_history.php" style="display:inline-block; margin-top: 1rem; background: #d32f2f; color: white; padding: 0.75rem 1.5rem; border-radius: 25px; text-decoration:none;">View Order History</a>
+        </div>
+    </section>
+</body>
+</html>
