@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review Your Order</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #f9f9f9;
+        }
+        .review-container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h2 {
+            color: #d32f2f;
+            text-align: center;
+        }
+        h3 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .error {
+            color: #e74c3c;
+            background: #ffebee;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+        select, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        button {
+            background: #d32f2f;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            width: 100%;
+        }
+        button:hover {
+            background: #b71c1c;
+        }
+        .reviews-section {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="review-container">
+        <h2>Review Your Order</h2>
+        <h3>Order #12345 from Example Restaurant</h3>
+
+        <!-- Example error message -->
+        <p class="error">Rating must be between 1 and 5.</p>
+
+        <form method="POST" action="#">
+            <label for="rating">Rating (1–5)</label>
+            <select name="rating" id="rating" required>
+                <option value="">Select a rating</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+
+            <label for="comment">Comment (Optional)</label>
+            <textarea name="comment" id="comment" rows="4" placeholder="Share your experience..."></textarea>
+
+            <button type="submit">Submit Review</button>
+        </form>
+
+        <div class="reviews-section">
+            <h3>Reviews for Example Restaurant</h3>
+            <p>No reviews yet for this restaurant.</p>
+        </div>
+    </div>
+</body>
+</html>
