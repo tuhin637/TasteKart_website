@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>TasteKart - Order History</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .dashboard-section { max-width: 1200px; margin: 3rem auto; padding: 1rem; }
+        .order-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
+        .menu-card { background: var(--card-bg, #fff); padding: 1.5rem; border-radius: 15px; box-shadow: 0 5px 15px var(--shadow, rgba(0,0,0,0.1)); }
+        .menu-card h3 { margin-top: 0; color: #333; }
+        .menu-card p { margin: 0.5rem 0; color: #666; }
+        .error, .success { text-align: center; margin-bottom: 1rem; padding: 0.5rem; border-radius: 4px; }
+        .error { color: #e74c3c; background-color: #ffebee; }
+        .success { color: #27ae60; background-color: #e8f5e9; }
+        .review-button { background: var(--primary-color, #d32f2f); color: white; border: none; padding: 0.75rem; border-radius: 25px; font-weight: 700; cursor: pointer; text-align: center; display: block; margin-top: 1rem; text-decoration: none; }
+        .review-button:hover { background: var(--primary-dark, #b71c1c); }
+        .review-button:disabled { background: #ccc; cursor: not-allowed; }
+        .order-history { display: none; }
+        .order-history.active { display: block; }
+        .toggle-button { background: var(--primary-color, #d32f2f); color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 25px; font-weight: 700; cursor: pointer; margin-bottom: 1rem; }
+        .toggle-button:hover { background: var(--primary-dark, #b71c1c); }
+
+        :root {
+    --primary-color: #d32f2f;
+    --primary-dark: #b71c1c;
+    --card-bg: #ffffff;
+    --shadow: rgba(0, 0, 0, 0.1);
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f4f4f4;
+}
+
+header {
+    background: var(--primary-color);
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header .logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 1.5rem;
+    font-size: 1rem;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.html" class="logo">TasteKart</a>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="order_history.html">Order History</a>
+            <a href="order_history.html">Orders</a>
+            <a href="profile.html">Profile</a>
+            <a href="logout.html">Logout</a>
+        </nav>
+    </header>
+
+    <section class="dashboard-section">
+        <h2 style="text-align: center; margin-bottom: 1.5rem; color: var(--primary-color, #d32f2f);">Your Order History</h2>
+        <button class="toggle-button">View Orders</button>
+        <div class="order-history" id="order-history">
+            <div class="order-grid">
+                <div class="menu-card">
+                    <h3>Order #123</h3>
+                    <p>Restaurant: Sample Restaurant</p>
+                    <p>Total: ৳500.00</p>
+                    <p>Status: Delivered</p>
+                    <a href="review.html?order_id=123" class="review-button">Leave a Review</a>
+                </div>
+                <div class="menu-card">
+                    <h3>Order #124</h3>
+                    <p>Restaurant: Sample Restaurant</p>
+                    <p>Total: ৳750.00</p>
+                    <p>Status: Delivered</p>
+                    <a href="#" class="review-button" disabled>Review Submitted</a>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
