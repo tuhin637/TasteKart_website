@@ -96,49 +96,4 @@ CREATE TABLE payment_transactions (
 );
 
 
-SELECT * FROM orders;
-
-SELECT COUNT(*) FROM orders WHERE status = 'delivered';
-
-INSERT INTO orders (user_id, restaurant_id, total_amount, status, delivery_address, created_at, estimated_delivery)
-VALUES (2, 3, 500.00, 'delivered', 'Test Address', NOW(), DATE_ADD(NOW(), INTERVAL 1 HOUR));
-INSERT INTO order_items (order_id, menu_item_id, quantity, price) VALUES (LAST_INSERT_ID(), 1, 1, 500.00);
-
-SELECT * FROM users WHERE role = 'admin';
-
-INSERT INTO users (name, email, password, role, created_at)
-VALUES ('Admin', 'admin@tastekart.com', '$2y$10$0jvz1l2Qz0o1z1y2x3z4y5z6x7y8z9A0B1C2D3E4F5G6H7I8J9K0', 'admin', NOW());
-
-SELECT DATE(created_at) as order_date, COUNT(*) as order_count 
-FROM orders 
-WHERE created_at >= DATE_SUB(NOW(), INTERVAL 2 DAY) 
-GROUP BY DATE(created_at);
-
-
-ALTER TABLE payment_transactions
-DROP COLUMN IF EXISTS transaction_id;
-
-ALTER TABLE payment_transactions
-ADD COLUMN IF NOT EXISTS otp_code VARCHAR(10) NOT NULL DEFAULT '';
-
-ALTER TABLE payment_transactions
-MODIFY COLUMN phone_number VARCHAR(15) NOT NULL;
-
-DESCRIBE payment_transactions;
-
-INSERT INTO menu_items (restaurant_id, name, category, price, prep_time, image) 
-VALUES (3, 'Test Pizza', 'pizza', 500.00, 30, 'https://example.com/image.jpg');
-
-SELECT id FROM users WHERE email = 'restaurant@tastekart.com';
-
-SELECT * FROM payment_transactions WHERE order_id = 8;
-
-SELECT created_at FROM orders WHERE id = 8;
-
-SELECT * FROM orders WHERE id = 8;
-
-ALTER TABLE payment_transactions
-ADD COLUMN IF NOT EXISTS phone_number VARCHAR(15) NOT NULL DEFAULT '',
-ADD COLUMN IF NOT EXISTS otp_code VARCHAR(10) NOT NULL DEFAULT '';
-
 
