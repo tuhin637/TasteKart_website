@@ -1534,7 +1534,7 @@ try {
             clearInterval(intervalIdHero);
         }
 
-        heroSlider.addEventListener('mouseover', pauseHeroCycle);
+        
         heroSlider.addEventListener('mouseout', startHeroCycle);
 
         startHeroCycle();
