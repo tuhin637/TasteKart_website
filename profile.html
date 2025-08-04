@@ -1,48 +1,104 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Update your profile on TasteKart." />
+    <meta name="keywords" content="TasteKart, profile, food delivery, Bangladesh" />
+    <meta name="author" content="TasteKart Team" />
     <title>Profile - TasteKart</title>
+    <!-- Font Awesome FREE CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #ff6f61;
-            --primary-dark: #e55a4f;
-            --card-bg: #ffffff;
+            --primary-color: #00c4b4;
+            --primary-dark: #009688;
+            --secondary-color: #6a1b9a;
+            --accent-color: #ff7f50;
+            --card-bg: #f5f5f0;
             --shadow: rgba(0, 0, 0, 0.1);
+            --text-color: #333333;
+            --gradient: linear-gradient(135deg, #00c4b4, #6a1b9a);
+            --gradient-overlay: linear-gradient(135deg, rgba(0, 196, 180, 0.8), rgba(106, 27, 154, 0.8));
+            --background-gradient: linear-gradient(135deg, #e6e6fa 0%, #e0f7f9 100%);
         }
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: Arial, sans-serif;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--background-gradient);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
         }
         header {
-            background: var(--primary-color);
-            padding: 1rem 2rem;
+            background: var(--gradient);
+            color: #fff;
+            padding: 1.5rem 3rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            animation: slideDown 0.5s ease-out;
+        }
+        @keyframes slideDown {
+            from { transform: translateY(-100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
         .logo {
-            color: white;
-            font-size: 1.5rem;
-            font-weight: bold;
+            font-size: 2rem;
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            background: var(--gradient);
+            
+            -webkit-text-fill-color: transparent;
             text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: transform 0.3s ease;
+        }
+        .logo:hover {
+            transform: scale(1.05);
+        }
+        nav {
+            display: flex;
+            align-items: center;
         }
         nav a {
-            color: white;
-            text-decoration: none;
+            color: #fff;
             margin-left: 1.5rem;
+            text-decoration: none;
+            font-size: 1.1rem;
             font-weight: 500;
+            padding: 0.5rem 1.2rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.1);
         }
         nav a:hover {
-            text-decoration: underline;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px) scale(1.05);
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
         }
         .profile-section {
             max-width: 600px;
             margin: 3rem auto;
-            padding: 1rem;
+            padding: 2.5rem;
+            background: #fff;
+            border-radius: 25px;
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.1);
+            animation: fadeInUp 0.5s ease-out;
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         .profile-form {
             background: var(--card-bg);
@@ -50,58 +106,240 @@
             border-radius: 15px;
             box-shadow: 0 5px 15px var(--shadow);
         }
+        .profile-form h2 {
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            font-size: 2.5rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-shadow: 1px 1px 5px rgba(0, 196, 180, 0.2);
+        }
         .profile-form label {
             display: block;
             font-weight: 600;
             margin-bottom: 0.5rem;
         }
-        .profile-form input,
-        .profile-form textarea {
+        .profile-form input, .profile-form textarea {
             width: 100%;
             padding: 0.75rem;
             margin-bottom: 1rem;
             border: 1px solid #ddd;
             border-radius: 8px;
             font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+        .profile-form input:focus, .profile-form textarea:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 5px rgba(0, 196, 180, 0.3);
         }
         .profile-form button {
             width: 100%;
-            background: var(--primary-color);
+            background: var(--gradient);
             color: white;
             border: none;
             padding: 0.75rem;
             border-radius: 25px;
-            font-weight: 700;
+            font-weight: 600;
+            letter-spacing: 1.5px;
             cursor: pointer;
+            transition: all 0.4s ease;
         }
         .profile-form button:hover {
-            background: var(--primary-dark);
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(0, 196, 180, 0.4);
+        }
+        @media (max-width: 768px) {
+            header {
+                padding: 1rem 1.5rem;
+                flex-direction: column;
+                gap: 1rem;
+            }
+            nav a {
+                margin: 0.5rem;
+                padding: 0.4rem 1rem;
+            }
+            .profile-section {
+                padding: 1.5rem;
+            }
+            .profile-form {
+                padding: 1rem;
+            }
+            .profile-form input, .profile-form textarea {
+                padding: 0.6rem;
+            }
+            .profile-form button {
+                padding: 0.6rem;
+            }
+        }
+        footer {
+            background: var(--gradient);
+            color: #fff;
+            padding: 3rem 2rem;
+            margin-top: 3rem;
+            box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.1);
+        }
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+        .footer-column {
+            flex: 1;
+            min-width: 200px;
+        }
+        .footer-logo .logo {
+            font-size: 2.5rem;
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            color: #fff;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: transform 0.3s ease;
+        }
+        .footer-logo .logo:hover {
+            transform: scale(1.05);
+            color: #e0f7f9;
+        }
+        .footer-logo p {
+            font-size: 0.9rem;
+            margin-top: 1rem;
+            color: #e0e0e0;
+            line-height: 1.5;
+        }
+        .footer-links h4 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            color: var(--accent-color);
+        }
+        .footer-links a {
+            color: #fff;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+        .footer-links a:hover {
+            color: var(--accent-color);
+        }
+        .footer-social h4 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            color: var(--accent-color);
+        }
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+        }
+        .social-icons .icon {
+            color: #fff;
+            font-size: 1.8rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.1);
+        }
+        .social-icons .icon:hover {
+            transform: scale(1.2);
+            background: var(--gradient-overlay);
+            color: #fff;
+        }
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            color: #e0e0e0;
+        }
+        @media (max-width: 768px) {
+            .footer-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            .footer-column {
+                margin-bottom: 1.5rem;
+            }
+            .footer-bottom {
+                margin-top: 1rem;
+            }
+            .social-icons .icon {
+                font-size: 1.6rem;
+                width: 45px;
+                height: 45px;
+            }
         }
     </style>
 </head>
 <body>
     <header>
-        <a href="index.php" class="logo">TasteKart</a>
+        <a href="index.html" class="logo">TasteKart</a>
         <nav>
-            <a href="index.php">Home</a>
-            <a href="order_history.php">Order History</a>
-            <a href="profile.php">Profile</a>
-            <a href="logout.php">Logout</a>
+            <a href="index.html">Home</a>
+            <a href="order_history.html">Order History</a>
+            <a href="profile.html">Profile</a>
+            <a href="logout.html">Logout</a>
         </nav>
     </header>
     <section class="profile-section">
-        <h2 style="text-align: center; margin-bottom: 1.5rem; color: var(--primary-color);">Profile</h2>
-        <form method="POST" class="profile-form">
-            <label for="name">Name</label>
-            <input type="text" id="name" name="name" value="John Doe" required>
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" value="john.doe@example.com" required>
-            <label for="phone">Phone</label>
-            <input type="text" id="phone" name="phone" value="+880123456789" required>
-            <label for="address">Address</label>
-            <textarea id="address" name="address" placeholder="ঠিকানা">123 Main Street, Dhaka</textarea>
-            <button type="submit">Update Profile</button>
-        </form>
+        <div class="profile-form">
+            <h2>Profile</h2>
+            <form method="POST" class="profile-form">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" value="John Doe" required>
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" value="john.doe@example.com" required>
+                <label for="phone">Phone</label>
+                <input type="text" id="phone" name="phone" value="+8801234567890" required>
+                <label for="address">Address</label>
+                <textarea id="address" name="address" placeholder="ঠিকানা">123 Example Street, Dhaka, Bangladesh</textarea>
+                <button type="submit">Update Profile</button>
+            </form>
+        </div>
     </section>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-column footer-logo">
+                <a href="index.html" class="logo">TasteKart</a>
+                <p>Delivering joy, one meal at a time. TasteKart brings you the best local flavors with fast, reliable service across Bangladesh.</p>
+                <p>Contact us: +880 01792920637 | tastekart@gmail.com</p>
+            </div>
+            <div class="footer-column footer-links">
+                <h4>Quick Links</h4>
+                <a href="about.html">About Us</a>
+                <a href="contact.html">Contact</a>
+                <a href="terms.html">Terms & Conditions</a>
+                <a href="privacy.html">Privacy Policy</a>
+            </div>
+            <div class="footer-column footer-social">
+                <h4>Follow Us</h4>
+                <div class="social-icons">
+                    <a href="https://www.facebook.com" target="_blank" class="icon"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.linkedin.com" target="_blank" class="icon"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://www.instagram.com" target="_blank" class="icon"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.youtube.com" target="_blank" class="icon"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 TasteKart. All rights reserved</p>
+        </div>
+    </footer>
 </body>
 </html>
