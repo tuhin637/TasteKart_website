@@ -4,12 +4,21 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>TasteKart - Restaurant Dashboard</title>
+    <!-- Font Awesome FREE CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #d32f2f;
-            --primary-dark: #b71c1c;
-            --card-bg: #fff;
+            --primary-color: #00c4b4;
+            --primary-dark: #009688;
+            --secondary-color: #6a1b9a;
+            --accent-color: #ff7f50;
+            --card-bg: #f5f5f0;
             --shadow: rgba(0, 0, 0, 0.1);
+            --text-color: #333333;
+            --gradient: linear-gradient(135deg, #00c4b4, #6a1b9a);
+            --gradient-overlay: linear-gradient(135deg, rgba(0, 196, 180, 0.8), rgba(106, 27, 154, 0.8));
+            --background-gradient: linear-gradient(135deg, #e6e6fa 0%, #e0f7f9 100%);
         }
 
         * {
@@ -19,180 +28,509 @@
         }
 
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Poppins', sans-serif;
+            background: var(--background-gradient);
+            color: var(--text-color);
             line-height: 1.6;
-            background-color: #f4f4f4;
+            overflow-x: hidden;
         }
 
         header {
-            background: var(--primary-color);
-            color: white;
-            padding: 1rem;
+            background: var(--gradient);
+            color: #fff;
+            padding: 1.5rem 3rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px var(--shadow);
+            animation: slideDown 0.5s ease-out;
         }
 
-        header .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            text-decoration: none;
-            color: white;
+        @keyframes slideDown {
+            from { transform: translateY(-100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
 
-        header nav a {
-            color: white;
+        .logo {
+            font-size: 2rem;
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            background: var(--gradient);
+            
+            -webkit-text-fill-color: transparent;
             text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+        }
+
+        nav a {
+            color: #fff;
             margin-left: 1.5rem;
+            text-decoration: none;
+            font-size: 1.1rem;
             font-weight: 500;
+            padding: 0.5rem 1.2rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.1);
+            position: relative;
         }
 
-        header nav a:hover {
-            text-decoration: underline;
+        nav a:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px) scale(1.05);
+            text-shadow: 0 2px 5px var(--shadow);
         }
 
         .dashboard-section {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 3rem auto;
-            padding: 1rem;
+            padding: 2.5rem;
+            background: #fff;
+            border-radius: 25px;
+            box-shadow: 0 10px 35px var(--shadow);
+            animation: fadeInUp 0.5s ease-out;
         }
 
-        .dashboard-section h2 {
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .dashboard-section h2, .dashboard-section h3 {
             text-align: center;
-            margin-bottom: 1.5rem;
+            font-family: 'Playfair Display', serif;
             color: var(--primary-color);
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-shadow: 1px 1px 5px rgba(0, 196, 180, 0.2);
         }
 
         .dashboard-section h3 {
-            margin-bottom: 1rem;
-            color: #333;
+            font-size: 2rem;
         }
 
-        .dashboard-section form {
-            background: var(--card-bg);
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px var(--shadow);
-            margin-bottom: 2rem;
-        }
-
-        .dashboard-section label {
-            display: block;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        .dashboard-section input,
-        .dashboard-section select {
-            width: 100%;
-            padding: 0.75rem;
-            margin-bottom: 1rem;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-size: 1rem;
-        }
-
-        .dashboard-section button {
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 0.75rem;
-            border-radius: 25px;
-            font-weight: 700;
-            cursor: pointer;
-        }
-
-        .dashboard-section button:hover {
-            background: var(--primary-dark);
-        }
-
-        .menu-grid,
-        .order-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-        }
-
-        .menu-card {
-            background: var(--card-bg);
-            padding: 1.5rem;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px var(--shadow);
-        }
-
-        .menu-card img {
-            width: 100%;
-            height: 150px;
-            object-fit: cover;
-            border-radius: 10px;
-            margin-bottom: 1rem;
-        }
-
-        .menu-card h3 {
-            margin-bottom: 0.5rem;
-            color: #333;
-        }
-
-        .menu-card p {
-            margin-bottom: 0.5rem;
-            color: #666;
-        }
-
-        .error,
-        .success {
+        .error, .success {
             text-align: center;
-            margin-bottom: 1rem;
-            padding: 0.5rem;
-            border-radius: 4px;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px var(--shadow);
+            font-weight: 500;
         }
 
         .error {
+            background: #ffebee;
             color: #e74c3c;
-            background-color: #ffebee;
         }
 
         .success {
+            background: #e8f5e9;
             color: #27ae60;
-            background-color: #e8f5e9;
         }
 
         .confirmed-orders {
             font-size: 1.2rem;
             font-weight: 600;
             color: var(--primary-color);
-            margin-bottom: 1rem;
+            margin-bottom: 2rem;
             text-align: center;
-            padding: 0.5rem;
-            background: var(--card-bg);
-            border-radius: 8px;
-            box-shadow: 0 2px 5px var(--shadow);
+            padding: 1.5rem;
+            background: linear-gradient(135deg, var(--card-bg) 0%, #fafafa 100%);
+            border-radius: 20px;
+            box-shadow: 0 6px 20px var(--shadow);
+            transition: all 0.4s ease;
+        }
+
+        .confirmed-orders:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 196, 180, 0.2);
         }
 
         .confirmed-orders.zero {
             color: #999;
         }
 
-        .order-history {
-            display: none;
+        .confirmed-orders.zero span {
+            font-size: 0.9rem;
+            color: #666;
         }
 
-        .order-history.active {
+        .dashboard-section form {
+            background: linear-gradient(135deg, var(--card-bg) 0%, #fafafa 100%);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px var(--shadow);
+            margin-bottom: 2rem;
+            transition: all 0.4s ease;
+        }
+
+        .dashboard-section form:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 196, 180, 0.2);
+        }
+
+        .dashboard-section label {
             display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
         }
 
-        .toggle-button {
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 0.75rem 1.5rem;
-            border-radius: 25px;
-            font-weight: 700;
-            cursor: pointer;
+        .dashboard-section input, .dashboard-section select {
+            width: 100%;
+            padding: 0.75rem;
             margin-bottom: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            background: #f9f9f9;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .toggle-button:hover {
-            background: var(--primary-dark);
+        .dashboard-section input:focus, .dashboard-section select:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 8px rgba(0, 196, 180, 0.3);
+            outline: none;
+        }
+
+        .dashboard-section button {
+            background: var(--gradient);
+            color: #fff;
+            border: none;
+            padding: 0.8rem 1.8rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.4s ease;
+            width: 100%;
+        }
+
+        .dashboard-section button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 196, 180, 0.4);
+        }
+
+        .delete-button {
+            background: #e74c3c;
+        }
+
+        .delete-button:hover {
+            background: #c0392b;
+            box-shadow: 0 6px 20px rgba(231, 76, 60, 0.4);
+        }
+
+        .toggle-update-form {
+            background: var(--accent-color);
+            margin-right: 0.5rem;
+        }
+
+        .toggle-update-form:hover {
+            background: #ff6f40;
+            box-shadow: 0 6px 20px rgba(255, 127, 80, 0.4);
+        }
+
+        .menu-table-container {
+            overflow-x: auto;
+            background: linear-gradient(135deg, var(--card-bg) 0%, #fafafa 100%);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px var(--shadow);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .menu-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 1rem;
+        }
+
+        .menu-table th, .menu-table td {
+            padding: 1.2rem;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .menu-table th {
+            background: var(--gradient);
+            color: #fff;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        .menu-table tr {
+            transition: all 0.4s ease;
+        }
+
+        .menu-table tr:hover {
+            background: #f8f9fa;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px var(--shadow);
+        }
+
+        .menu-table td {
+            color: var(--text-color);
+        }
+
+        .menu-table .image {
+            width: 100px;
+            height: 60px;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+
+        .menu-table .image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+            transition: transform 0.4s ease;
+        }
+
+        .menu-table .image img:hover {
+            transform: scale(1.1);
+        }
+
+        .update-form {
+            margin-top: 1rem;
+            padding: 1.5rem;
+            border: 1px solid #eee;
+            border-radius: 15px;
+            background: linear-gradient(135deg, var(--card-bg) 0%, #fafafa 100%);
+            box-shadow: 0 4px 15px var(--shadow);
+            transition: all 0.4s ease;
+        }
+
+        .update-form:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 196, 180, 0.2);
+        }
+
+        .update-form button {
+            margin-top: 1rem;
+        }
+
+        footer {
+            background: var(--gradient);
+            color: #fff;
+            padding: 3rem 2rem;
+            margin-top: 3rem;
+            box-shadow: 0 -4px 15px var(--shadow);
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .footer-column {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .footer-logo .logo {
+            font-size: 2.5rem;
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            color: #fff;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: transform 0.3s ease;
+        }
+
+        .footer-logo .logo:hover {
+            transform: scale(1.05);
+            color: #e0f7f9;
+        }
+
+        .footer-logo p {
+            font-size: 0.9rem;
+            margin-top: 1rem;
+            color: #e0e0e0;
+            line-height: 1.5;
+        }
+
+        .footer-links h4 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            color: var(--accent-color);
+        }
+
+        .footer-links a {
+            color: #fff;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .footer-social h4 {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            color: var(--accent-color);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-icons .icon {
+            color: #fff;
+            font-size: 1.8rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .social-icons .icon:hover {
+            transform: scale(1.2);
+            background: var(--gradient-overlay);
+            color: #fff;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            color: #e0e0e0;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 1rem 1.5rem;
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav a {
+                margin: 0.5rem;
+                padding: 0.4rem 1rem;
+                font-size: 1rem;
+            }
+
+            .dashboard-section {
+                padding: 1.5rem;
+                margin: 1.5rem;
+            }
+
+            .dashboard-section h2 {
+                font-size: 2rem;
+            }
+
+            .dashboard-section h3 {
+                font-size: 1.6rem;
+            }
+
+            .menu-table-container {
+                overflow-x: auto;
+            }
+
+            .menu-table th, .menu-table td {
+                padding: 0.75rem;
+                font-size: 0.9rem;
+            }
+
+            .menu-table .image {
+                width: 80px;
+                height: 50px;
+            }
+
+            .menu-table .image img {
+                max-width: 100%;
+            }
+
+            .dashboard-section form {
+                padding: 1.5rem;
+            }
+
+            .dashboard-section button, .delete-button, .toggle-update-form {
+                padding: 0.6rem;
+                font-size: 0.9rem;
+            }
+
+            .update-form {
+                padding: 1rem;
+            }
+
+            .footer-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer-column {
+                margin-bottom: 1.5rem;
+            }
+
+            .footer-bottom {
+                margin-top: 1rem;
+            }
+
+            .social-icons .icon {
+                font-size: 1.6rem;
+                width: 45px;
+                height: 45px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .dashboard-section {
+                margin: 1rem;
+                padding: 1rem;
+            }
+
+            .menu-table th, .menu-table td {
+                padding: 0.5rem;
+                font-size: 0.8rem;
+            }
+
+            .menu-table .image {
+                width: 60px;
+                height: 40px;
+            }
+
+            .dashboard-section input, .dashboard-section select {
+                font-size: 0.9rem;
+            }
         }
     </style>
 </head>
@@ -201,24 +539,26 @@
         <a href="index.html" class="logo">TasteKart</a>
         <nav>
             <a href="index.html">Home</a>
-            <a href="restaurant_dashboard.html">Order History</a>
+            <a href="restaurant_order_history.html">Order History</a>
             <a href="profile.html">Profile</a>
             <a href="logout.html">Logout</a>
         </nav>
     </header>
 
-    <section class="dashboard-section">
+    <section class="dashboard-section" aria-label="Restaurant Dashboard">
         <h2>Restaurant Dashboard</h2>
 
-        <div class="success">Menu item added successfully.</div>
-        <div class="error">Error fetching orders.</div>
+        <div class="confirmed-orders zero">
+            Total Confirmed Orders (Delivered): 0
+            <br><span>(No orders delivered yet. View and update orders in Order History.)</span>
+        </div>
 
         <h3>Add New Menu Item</h3>
         <form>
             <label for="name">Name</label>
-            <input type="text" id="name" name="name" required>
+            <input type="text" id="name" name="name" required aria-label="Menu item name">
             <label for="category">Category</label>
-            <select id="category" name="category" required>
+            <select id="category" name="category" required aria-label="Menu item category">
                 <option value="pizza">Pizza</option>
                 <option value="burgers">Burgers</option>
                 <option value="asian">Asian</option>
@@ -226,74 +566,66 @@
                 <option value="beverages">Beverages</option>
             </select>
             <label for="price">Price (৳)</label>
-            <input type="number" id="price" name="price" step="0.01" required>
-            <label for="prep_time"> Feature Time (minutes)</label>
-            <input type="number" id="prep_time" name="prep_time" required>
+            <input type="number" id="price" name="price" step="0.01" min="0.01" required aria-label="Menu item price in BDT">
+            <label for="prep_time">Preparation Time (minutes)</label>
+            <input type="number" id="prep_time" name="prep_time" min="1" required aria-label="Preparation time in minutes">
             <label for="image">Image URL</label>
-            <input type="text" id="image" name="image" placeholder="Optional">
-            <button type="submit">Add Item</button>
+            <input type="text" id="image" name="image" placeholder="Optional (defaults to placeholder)" aria-label="Menu item image URL">
+            <button type="submit" name="add_item">Add Item</button>
         </form>
 
         <h3>Your Menu Items</h3>
-        <div class="menu-grid">
-            <div class="menu-card">
-                <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Margherita Pizza">
-                <h3>Margherita Pizza</h3>
-                <p>Category: Pizza</p>
-                <p>Price: ৳450.00</p>
-                <p>Prep Time: 15 mins</p>
-                <form>
-                    <label for="name_1">Name</label>
-                    <input type="text" id="name_1" name="name" value="Margherita Pizza" required>
-                    <label for="category_1">Category</label>
-                    <select id="category_1" name="category" required>
-                        <option value="pizza" selected>Pizza</option>
-                        <option value="burgers">Burgers</option>
-                        <option value="asian">Asian</option>
-                        <option value="desserts">Desserts</option>
-                        <option value="beverages">Beverages</option>
-                    </select>
-                    <label for="price_1">Price (৳)</label>
-                    <input type="number" id="price_1" name="price" step="0.01" value="450.00" required>
-                    <label for="prep_time_1">Prep Time (minutes)</label>
-                    <input type="number" id="prep_time_1" name="prep_time" value="15" required>
-                    <label for="image_1">Image URL</label>
-                    <input type="text" id="image_1" name="image" value="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80">
-                    <button type="submit">Update Item</button>
-                </form>
-            </div>
-        </div>
-
-        <h3>Orders</h3>
-        <div class="confirmed-orders zero">
-            Total Confirmed Orders (Delivered): 0
-            <br><span style="font-size: 0.9rem; color: #666;">(No orders delivered yet. Update an order status to 'Delivered' using the form below.)</span>
-        </div>
-        <button class="toggle-button">View Orders</button>
-        <div class="order-history" id="order-history">
-            <div class="order-grid">
-                <p style="text-align: center; color: #999;">No orders available for your restaurant.</p>
-            </div>
-        </div>
-        <div class="order-grid">
-            <div class="menu-card">
-                <h3>Order #1</h3>
-                <p>Customer: John Doe</p>
-                <p>Total: ৳750.00</p>
-                <p>Status: Pending</p>
-                <form>
-                    <select name="status">
-                        <option value="pending" selected>Pending</option>
-                        <option value="received">Received</option>
-                        <option value="preparing">Preparing</option>
-                        <option value="delivered">Delivered</option>
-                        <option value="cancelled">Cancelled</option>
-                        <option value="validating">Validating</option>
-                    </select>
-                    <button type="submit">Update Status</button>
-                </form>
-            </div>
+        <div class="menu-table-container">
+            <table class="menu-table" aria-label="Menu items table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Category</th>
+                        <th>Price</th>
+                        <th>Prep Time</th>
+                        <th>Image</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="7" style="text-align: center; color: #999; padding: 2rem;">
+                            No menu items available.
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </section>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-column footer-logo">
+                <a href="index.html" class="logo">TasteKart</a>
+                <p>Delivering joy, one meal at a time. TasteKart brings you the best local flavors with fast, reliable service across Bangladesh.</p>
+                <p>Contact us: +880 01792920637 | support@tastekart.com</p>
+            </div>
+            <div class="footer-column footer-links">
+                <h4>Quick Links</h4>
+                <a href="about.html">About Us</a>
+                <a href="contact.html">Contact</a>
+                <a href="terms.html">Terms & Conditions</a>
+                <a href="privacy.html">Privacy Policy</a>
+            </div>
+            <div class="footer-column footer-social">
+                <h4>Follow Us</h4>
+                <div class="social-icons">
+                    <a href="https://www.facebook.com" target="_blank" class="icon"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.linkedin.com" target="_blank" class="icon"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://www.instagram.com" target="_blank" class="icon"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.youtube.com" target="_blank" class="icon"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 TasteKart. All rights reserved.</p>
+        </div>
+    </footer>
 </body>
 </html>
