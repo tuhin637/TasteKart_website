@@ -1,103 +1,320 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>TasteKart - Checkout</title>
-    <style>
-        .checkout-section { 
-            max-width: 600px; 
-            margin: 3rem auto; 
-            padding: 1rem; 
-        }
-        .checkout-section form { 
-            background: var(--card-bg, #fff); 
-            padding: 2rem; 
-            border-radius: 15px; 
-            box-shadow: 0 5px 15px var(--shadow, rgba(0,0,0,0.1)); 
-        }
-        .checkout-section label { 
-            display: block; 
-            font-weight: 600; 
-            margin-bottom: 0.5rem; 
-        }
-        .checkout-section input { 
-            width: 100%; 
-            padding: 0.75rem; 
-            margin-bottom: 1rem; 
-            border: 1px solid #ddd; 
-            border-radius: 8px; 
-            font-size: 1rem; 
-        }
-        .checkout-section button { 
-            width: 100%; 
-            background: var(--primary-color, #d32f2f); 
-            color: white; 
-            border: none; 
-            padding: 0.75rem; 
-            border-radius: 25px; 
-            font-weight: 700; 
-            cursor: pointer; 
-        }
-        .checkout-section button:hover { 
-            background: var(--primary-dark, #b71c1c); 
-        }
-        .error { 
-            color: #e74c3c; 
-            background-color: #ffebee; 
-            padding: 0.5rem; 
-            border-radius: 4px; 
-            text-align: center; 
-            margin-bottom: 1rem; 
-        }
-        body { 
-            font-family: Arial, sans-serif; 
-        }
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 2rem;
-            background: var(--primary-color, #d32f2f);
-            color: white;
-        }
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            text-decoration: none;
-            color: white;
-        }
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin-left: 1.5rem;
-            font-weight: 500;
-        }
-        nav a:hover {
-            text-decoration: underline;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Complete your order checkout on TasteKart. Enter delivery details and apply coupons." />
+  <meta name="keywords" content="TasteKart, checkout, food delivery, Bangladesh" />
+  <meta name="author" content="TasteKart Team" />
+  <title>TasteKart - Checkout</title>
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #00c4b4;
+      --primary-dark: #009688;
+      --secondary-color: #6a1b9a;
+      --accent-color: #ff7f50;
+      --card-bg: #f5f5f0;
+      --shadow: rgba(0, 0, 0, 0.1);
+      --text-color: #333;
+      --gradient: linear-gradient(135deg, #00c4b4, #6a1b9a);
+      --gradient-overlay: linear-gradient(135deg, rgba(0, 196, 180, 0.8), rgba(106, 27, 154, 0.8));
+      --background-gradient: linear-gradient(135deg, #e6e6fa 0%, #e0f7f9 100%);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--background-gradient);
+      color: var(--text-color);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    header {
+      background: var(--gradient);
+      color: #fff;
+      padding: 1.5rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .logo {
+      font-size: 2rem;
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      transition: transform 0.3s ease;
+    }
+
+    .logo:hover {
+      transform: scale(1.05);
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+    }
+
+    nav a {
+      color: #fff;
+      margin-left: 1.5rem;
+      text-decoration: none;
+      font-size: 1.1rem;
+      font-weight: 500;
+      padding: 0.5rem 1.2rem;
+      border-radius: 25px;
+      background: rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    nav a:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: translateY(-2px) scale(1.05);
+      text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    .checkout-section {
+      max-width: 600px;
+      margin: 3rem auto;
+      padding: 2.5rem;
+      background: #fff;
+      border-radius: 25px;
+      box-shadow: 0 10px 35px rgba(0, 0, 0, 0.1);
+    }
+
+    .checkout-section h2 {
+      text-align: center;
+      font-family: 'Playfair Display', serif;
+      color: var(--primary-color);
+      margin-bottom: 2rem;
+      font-size: 2.5rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+    }
+
+    .checkout-section form {
+      background: var(--card-bg);
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px var(--shadow);
+    }
+
+    .checkout-section label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .checkout-section input {
+      width: 100%;
+      padding: 0.75rem;
+      margin-bottom: 1rem;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+
+    .checkout-section button {
+      width: 100%;
+      background: var(--gradient);
+      color: white;
+      border: none;
+      padding: 1rem 2.5rem;
+      border-radius: 30px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      cursor: pointer;
+      transition: all 0.4s ease;
+    }
+
+    .checkout-section button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 20px rgba(0, 196, 180, 0.4);
+    }
+
+    footer {
+      background: var(--gradient);
+      color: #fff;
+      padding: 3rem 2rem;
+      margin-top: 3rem;
+    }
+
+    .footer-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+
+    .footer-column {
+      flex: 1;
+      min-width: 200px;
+    }
+
+    .footer-logo .logo {
+      font-size: 2.5rem;
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      color: #fff;
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .footer-logo p {
+      font-size: 0.9rem;
+      margin-top: 1rem;
+      color: #e0e0e0;
+    }
+
+    .footer-links h4,
+    .footer-social h4 {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      font-weight: 600;
+      color: var(--accent-color);
+    }
+
+    .footer-links a {
+      color: #fff;
+      text-decoration: none;
+      display: block;
+      margin-bottom: 0.5rem;
+      font-size: 1rem;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--accent-color);
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .social-icons .icon {
+      color: #fff;
+      font-size: 1.8rem;
+      text-decoration: none;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .social-icons .icon:hover {
+      transform: scale(1.2);
+      background: var(--gradient-overlay);
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+      margin-top: 2rem;
+      font-size: 0.9rem;
+      color: #e0e0e0;
+    }
+
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      nav a {
+        margin: 0.5rem;
+      }
+
+      .footer-container {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .social-icons {
+        justify-content: center;
+      }
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <a href="index.html" class="logo">TasteKart</a>
-        <nav>
-            <a href="index.html">Home</a>
-            <a href="order_history.html">Order History</a>
-            <a href="profile.html">Profile</a>
-            <a href="logout.html">Logout</a>
-        </nav>
-    </header>
 
-    <section class="checkout-section">
-        <h2 style="text-align: center; margin-bottom: 1.5rem; color: var(--primary-color, #d32f2f);">Checkout</h2>
-        <form method="POST" action="checkout.html">
-            <label for="delivery_address">Delivery Address</label>
-            <input type="text" id="delivery_address" name="delivery_address" required>
-            <label for="coupon_code">Coupon Code (Optional)</label>
-            <input type="text" id="coupon_code" name="coupon_code">
-            <button type="submit">Proceed to Payment</button>
-        </form>
-    </section>
+  <header>
+    <a href="#" class="logo">TasteKart</a>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">Order History</a>
+      <a href="#">Profile</a>
+      <a href="#">Logout</a>
+    </nav>
+  </header>
+
+  <section class="checkout-section">
+    <h2>Checkout</h2>
+    <form>
+      <label for="delivery_address">Delivery Address</label>
+      <input type="text" id="delivery_address" name="delivery_address" placeholder="Enter your address" required>
+
+      <label for="coupon_code">Coupon Code (Optional)</label>
+      <input type="text" id="coupon_code" name="coupon_code" placeholder="Enter promo code">
+
+      <button type="submit">Proceed to Payment</button>
+    </form>
+  </section>
+
+  <footer>
+    <div class="footer-container">
+      <div class="footer-column footer-logo">
+        <a href="#" class="logo">TasteKart</a>
+        <p>Delivering joy, one meal at a time. TasteKart brings you the best local flavors with fast, reliable service across Bangladesh.</p>
+        <p>Contact us: +880 01792920637 | tastekart@gmail.com</p>
+      </div>
+      <div class="footer-column footer-links">
+        <h4>Quick Links</h4>
+        <a href="#">About Us</a>
+        <a href="#">Contact</a>
+        <a href="#">Terms & Conditions</a>
+        <a href="#">Privacy Policy</a>
+      </div>
+      <div class="footer-column footer-social">
+        <h4>Follow Us</h4>
+        <div class="social-icons">
+          <a href="#" class="icon"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="icon"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#" class="icon"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="icon"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 TasteKart. All rights reserved. Design inspired by Tuhinuzzaman Tuhin</p>
+    </div>
+  </footer>
+
 </body>
 </html>
